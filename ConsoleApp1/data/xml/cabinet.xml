@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<cabinet xmlns="http://www.univ-grenoble-alpes.fr/l3miage/medical" 
+         xsi:schemaLocation="http://www.univ-grenoble-alpes.fr/l3miage/medical ../xsd/cabinet.xsd" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <nom>Soins à Grenoble</nom>
+    <adresse>
+        <numero>60</numero>
+        <rue>rue de la Chimie</rue>
+        <codePostal>38041</codePostal>
+        <ville>Grenoble</ville>
+    </adresse>
+    <infirmiers>
+        <infirmier>
+            <id>001</id>
+            <nom>Fréchie</nom>
+            <prénom>Sarah</prénom>
+            <photo>sarah.png</photo>
+        </infirmier>
+        <infirmier>
+            <id>002</id>
+            <nom>Stické</nom>
+            <prénom>Sophie</prénom>
+            <photo>sophie.png</photo>
+        </infirmier>
+        <infirmier>
+            <id>003</id>
+            <nom>Ochon</nom>
+            <prénom>Paul</prénom>
+            <photo>paul.png</photo>
+        </infirmier>        
+    </infirmiers>
+    <patients>
+        <!-- Homme né en août 98 en France à Marseille (n°55 en Bouche du Rhône) 458e naissance-->
+        <patient>
+            <nom>Alécole</nom>
+            <prénom>Yvon</prénom>
+            <sexe>M</sexe>
+            <naissance>1998-08-22</naissance>
+            <numero>198082205545852</numero>
+            <adresse>
+                <etage>6</etage>
+                <numero>50</numero>
+                <rue>avenue Félix Viallet</rue>
+                <ville>Grenoble</ville>
+                <codePostal>38031</codePostal>
+            </adresse>
+            <visite>
+                <date>2015-12-08</date>
+                <intervenant>001</intervenant>
+                <acte id="109"/>
+            </visite>
+        </patient>
+        <!-- Femme née le 08 mars 82 en France, à Lyon (n° 23 dans le rhône), il s’agissait de la 52e
+naissance dans cette ville-->
+        <patient>
+            <nom>Orouge</nom>
+            <prénom>Elvire</prénom>
+            <sexe>F</sexe>
+            <naissance>1982-03-08</naissance>
+            <numero>282030802305201</numero>
+            <adresse>
+                <rue>: Rond-Point de la Croix de Vie</rue>
+                <ville>La Tronche</ville>
+                <codePostal>38700</codePostal>
+            </adresse>
+            <visite>
+                <date>2015-12-08</date>
+                <acte id="300"/>
+            </visite>
+        </patient>
+        <!-- homme née le 25 mars 75 en France, à Chambéry (n° 65 dans la Savoie) 692e naissance.-->
+        <patient>
+            <nom>Pien</nom>
+            <prénom>Oscare</prénom>
+            <sexe>M</sexe>
+            <naissance>1975-03-25</naissance>
+            <numero>175032506569212</numero>
+            <adresse>
+                <rue>rue Casimir Brenier</rue>
+                <ville>Grenoble</ville>
+                <codePostal>38000</codePostal>
+            </adresse>
+            <visite>
+                <date>2015-12-08</date>
+                <intervenant>002</intervenant>
+                <acte id="101"/>
+                <acte id="104" />
+            </visite>
+        </patient> 
+        <!-- un petit garçon, né le 02 août 2011 en France, à Bordeaux(n° 63 dans la Gironde).35e naissance.-->
+        <patient>
+            <nom>Kapoëtla</nom>
+            <prénom>Xavier</prénom>
+            <sexe>M</sexe>
+            <naissance>2011-08-02</naissance>
+            <numero>111080206303501</numero>
+            <adresse>
+                <numero>25</numero>
+                <rue>rue des Martyrs</rue>
+                <ville>Grenoble</ville>
+                <codePostal>38042</codePostal>
+            </adresse>
+            <visite>
+                <date>2015-12-08</date>
+                <intervenant>003</intervenant>
+                <acte id="111"/>
+            </visite>
+        </patient>
+    </patients>
+</cabinet>

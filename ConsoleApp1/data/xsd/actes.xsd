@@ -1,0 +1,79 @@
+<xs:schema attributeFormDefault="unqualified" 
+           elementFormDefault="qualified" 
+           targetNamespace="http://www.univ-grenoble-alpes.fr/l3miage/actes" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:act="http://www.univ-grenoble-alpes.fr/l3miage/actes">
+    
+    <xs:element name="ngap" type="act:NGAP"/>
+        
+        <xs:complexType name="NGAP">
+            <xs:sequence>
+                <xs:element name="types" type="act:Types"/>
+                <xs:element name="actes" type="act:Actes"/>
+            </xs:sequence>
+        </xs:complexType>
+        
+        <xs:complexType name="Types">
+            <xs:sequence>
+                <xs:element name="type" type="act:Type" maxOccurs="unbounded"/>
+            </xs:sequence>
+            
+        </xs:complexType>
+    
+    <xs:complexType name="Type">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="act:Typeacte"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:complexType name="Actes">
+        <xs:sequence>
+            <xs:element name="acte" type="act:Acte" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!-- acte -->
+        <xs:complexType name="Acte">
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="id" type="act:Acteid"/>
+                    <xs:attribute name="type" type="act:Typeacte"/>
+                    <xs:attribute name="clé" type="act:Cle"/>
+                    <xs:attribute name="coef" type="act:Coef"/>
+                </xs:extension>
+            </xs:simpleContent>
+
+        </xs:complexType>
+
+        <xs:simpleType name="Acteid">
+            <xs:restriction base="xs:string">
+                <xs:pattern value="10[1-9]|11[0-3]|20[0-4]|[34]0[0-3]"/>
+            </xs:restriction>
+        </xs:simpleType>
+
+        <xs:simpleType name="Coef">
+            <xs:restriction base="xs:double">
+                <xs:pattern value="[1-9]|([1-9].[1-9])|([1-9].[1-9][1-9])"/>
+            </xs:restriction>
+        </xs:simpleType>
+
+        <xs:simpleType name="Typeacte">
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="pi"/>
+                <xs:enumeration value="pc"/>
+                <xs:enumeration value="pl"/>
+                <xs:enumeration value="sd"/>
+            </xs:restriction>
+        </xs:simpleType>
+
+        <xs:simpleType name="Cle">
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="AMI"/>
+                <xs:enumeration value="DI"/>
+                <xs:enumeration value="AIS"/>
+            </xs:restriction>
+        </xs:simpleType>
+</xs:schema>

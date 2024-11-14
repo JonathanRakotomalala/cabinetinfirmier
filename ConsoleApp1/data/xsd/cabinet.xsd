@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:me="http://www.univ-grenoble-alpes.fr/l3miage/medical"
+           targetNamespace="http://www.univ-grenoble-alpes.fr/l3miage/medical"
+           elementFormDefault="qualified"
+>
+    <!-- Element racine -->
+    <xs:element name="cabinet" type="me:Cabinet">
+        <xs:key name="uniqueId">
+            <xs:selector xpath="me:infirmiers/me:infirmier"/>
+            <xs:field xpath="me:id"/>
+        </xs:key>
+        <xs:keyref name="idExist" refer="me:uniqueId">
+            <xs:selector xpath="me:patients/me:patient/me:visite"/>
+            <xs:field xpath="me:intervenant"/>
+        </xs:keyref>
+    </xs:element>
+
+    <xs:complexType name="Cabinet">
+        <xs:sequence>
+            <xs:element name="nom" type="xs:string"/>
+            <xs:element name="adresse" type="me:Adresse"/>
+            <xs:element name="infirmiers" type="me:Infirmiers"/>
+            <xs:element name="patients" type="me:Patients"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- adresse -->
+    <xs:complexType name="Adresse" >
+        <xs:sequence>
+            <xs:element name="numero" type="me:posint" />
+            <xs:element name="rue" type="xs:string"/>
+            <xs:element name="codePostal" type="me:CodePostal"/>
+            <xs:element name="ville" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Adressepatient" >
+        <xs:sequence>
+            <xs:element name="etage" type="me:posint" minOccurs="0"/>
+            <xs:element name="numero" type="me:posint" minOccurs="0"/>
+            <xs:element name="rue" type="xs:string"/>
+            <xs:element name="ville" type="xs:string"/>
+            <xs:element name="codePostal" type="me:CodePostal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+
+    <!-- Infirmier -->
+    <xs:complexType name="Infirmier">
+        <xs:sequence>
+            <xs:element name="id" type="me:Id"/>
+            <xs:element name="nom" type="xs:string"/>
+            <xs:element name="prénom" type ="xs:string"/>
+            <xs:element name="photo" type="me:Photo"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Patient -->
+    <xs:complexType name="Patient">
+        <xs:sequence>
+            <xs:element name="nom" type="xs:string"/>
+            <xs:element name="prénom" type="xs:string"/>
+            <xs:element name="sexe" type="me:Sexe"/>
+            <xs:element name="naissance" type="xs:date"/>
+            <xs:element name="numero" type="me:Numsoc"/>
+            <xs:element name="adresse" type="me:Adressepatient"/>
+            <xs:element name="visite" type="me:Visite"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Visite -->
+    <xs:complexType name="Visite">
+        <xs:sequence>
+            <xs:element name="date" type="xs:date"/>
+            <xs:element name="intervenant" type="me:Id" minOccurs="0"/>
+            <xs:element name="acte" type="me:acteid" maxOccurs="10"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Infirmiers -->
+    <xs:complexType name="Infirmiers">
+        <xs:sequence>
+            <xs:element name="infirmier" type="me:Infirmier" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Patients -->
+    <xs:complexType name="Patients">
+        <xs:sequence>
+            <xs:element name="patient" type="me:Patient" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="posint">
+        <xs:restriction base="xs:int">
+            <xs:minExclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- acte -->
+    <xs:complexType name="acteid">
+        <xs:attribute name="id" type="me:Acteid"/>
+    </xs:complexType>
+
+    <xs:simpleType name="Acteid">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="10[1-9]|11[0-3]|20[0-4]|[34]0[0-3]"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Coef">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9]|([1-9].[1-9])"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Typeacte">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="pi"/>
+            <xs:enumeration value="pc"/>
+            <xs:enumeration value="pl"/>
+            <xs:enumeration value="sd"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Cle">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AMI"/>
+            <xs:enumeration value="DI"/>
+            <xs:enumeration value="AIS"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Sexe -->
+    <xs:simpleType name="Sexe">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="M"/>
+            <xs:enumeration value="F"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Identifiant infirmier -->
+    <xs:simpleType name="Id">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="[0-9][0-9][1-9]"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Code postal -->
+    <xs:simpleType name="CodePostal">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9][0-9][0-9][0-9][0-9]"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Num securite sociale -->
+    <xs:simpleType name="Numsoc">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[12][0-9]{2}(0[1-9]|1[0-2])(2[AB]|[0-9]{2})[0-9]{3}[0-9]{3}([0-9]{2})"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Photo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z]*[.]png"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
+        

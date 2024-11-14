@@ -1,0 +1,6 @@
+﻿<patient xmlns:act="http://www.univ-grenoble-alpes.fr/l3miage/actes" xmlns:cab="http://www.univ-grenoble-alpes.fr/l3miage/medical"><nom>Kapoëtla</nom><prénom>Xavier</prénom><sexe>M</sexe><adresse><rue>rue des Martyrs</rue><codePostal>38042</codePostal><ville>Grenoble</ville></adresse><visite date="2015-12-08"><intervenant><nom>Ochon</nom><prénom>Paul</prénom></intervenant><acte>
+            Injection d'un ou plusieurs allergènes, poursuivant un traitement
+            d'hyposensibilisation spécifique, selon le protocole écrit, y compris la
+            surveillance, la tenue du dossier de soins, la transmission des informations
+            au médecin prescripteur.
+        </acte></visite></patient>
