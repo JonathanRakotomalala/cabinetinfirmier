@@ -6,50 +6,52 @@ namespace ConsoleApp1;
 
 [XmlRoot("adresse", Namespace = "http://www.univ-grenoble-alpes.fr/l3miage/medical")]
 [Serializable]
-public class Adresse
+public class AdresseRO
 {
     private int? _etage;
 
     [XmlElement("etage")]
-    public int? _Etage
+    public int? _EtageRO
     {
-        set => _etage = (value < 0) ? 0 : value;
-        get => _etage;
+        init { _etage = (value <= 0) ? 0 : value; }
+        get {return _etage;}
     }
 
 
     private int? _numero;
 
     [XmlElement("numero")]
-    public int? _Numero
+    public int? _NumeroRO
     {
-        set => _numero = (value < 0) ? 0 : value;
-        get => _numero;
+        init { _numero = (value <= 0) ? 0 : value; }
+        get { return _numero; }
     }
     
     private string _rue;
     [XmlElement("rue")]
-    public string _Rue
+    public string _RueRO
     {
-        set => _rue = value;
-        get => _rue;
+        init { _rue = value; }
+        get { return _rue; }
     }
     
     private string _ville;
     [XmlElement("ville")]
-    public string _Ville
+    public string _VilleRO
     {
-        set => _ville = value;
-        get => _ville;
+        init { _ville = value; }
+        get { return _ville;}
     }
     
     private string _codePostal;
     [XmlElement("codePostal")]
-    public string _CodePostal
+    public string _CodePostalRO
     {
-        set => _codePostal = (!(Regex.IsMatch(value, @"[1-9][0-9][0-9][0-9][0-9]")) || value.Length != 5)? "38000" : value;
-
-        get => _codePostal;
+        init
+        { _codePostal = (!(Regex.IsMatch(value, @"[1-9][0-9][0-9][0-9][0-9]")) || value.Length != 5)
+                ? "38000" : value;
+        }
+        get { return _codePostal; }
     }
     public override string ToString() {
         string s = "\n";

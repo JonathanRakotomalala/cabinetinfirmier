@@ -5,6 +5,8 @@
            elementFormDefault="qualified"
 >
     <!-- Element racine -->
+    <xs:element name="infirmiers" type ="me:Infirmiers"/>
+    <xs:element name="adresse" type="me:Adressepatient" />
     <xs:element name="cabinet" type="me:Cabinet">
         <xs:key name="uniqueId">
             <xs:selector xpath="me:infirmiers/me:infirmier"/>

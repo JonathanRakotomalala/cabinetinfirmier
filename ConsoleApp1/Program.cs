@@ -1,5 +1,6 @@
 ﻿using System.Security.AccessControl;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace ConsoleApp1
 {
@@ -67,13 +68,14 @@ namespace ConsoleApp1
                 var c = 0;
                 if (elementName == "patient" || elementName == "infirmier")
                 {
-                    var expression = "//cab:cabinet//" + "cab:" + elementName + "s" + "//cab:" + elementName +
+                    var expression = "/cab:cabinet/" + "cab:" + elementName + "s" + "//cab:" + elementName +
                                      "/cab:prénom";
                     
                     XmlNodeList noeuds = doc.GetElementsByTagName(elementName+"s");
                     
                     foreach (XmlNode noeud in noeuds.Item(0))
                     {
+                        if (noeud.Name==elementName)
                         c = c + 1;
                     }
                 }
@@ -150,8 +152,8 @@ namespace ConsoleApp1
             {
                 s = '2';
             }
-
-            return numSoc[0] == s && numSoc.Substring(1, 6) == (datenaissance.Replace("-", "")).Substring(2, 6);
+            
+            return (numSoc[0] == s) && (numSoc.Substring(1, 6) == (datenaissance.Replace("-", "")).Substring(2, 6));
             
         }
 
@@ -215,7 +217,7 @@ namespace ConsoleApp1
             Console.WriteLine("Nombre d'infirmiers après rajout d'un infirmier :"+count2("infirmier",doc));
         }
 
-        ajoutepatient(string nom, string prenom,string sexe, string naissancedate,string adresse)
+        public static void ajoutepatient(string nom,string prenom,string sexe,string naissancedate,string communecode)
         {
             XmlDocument doc;
             doc = new XmlDocument();
@@ -249,26 +251,40 @@ namespace ConsoleApp1
             
                         
             XmlElement numsoc = doc.CreateElement("numero", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            XmlText numText = doc.CreateTextNode(numerosoc);
+            string textnum =""+((sexe=="%M")? 1:2)+(naissancedate.Replace("-", "").Substring(2, 6))+communecode+"001"+"02";
+            XmlText numText = doc.CreateTextNode(textnum);
             numsoc.AppendChild(numText);
             
-            XmlElement adressepatient = doc.CreateElement("adresse", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
-
+            
+            Console.WriteLine("*****************  Entrer l'adresse  ******************");
             XmlElement ruepatient = doc.CreateElement("rue", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            XmlText rText = doc.CreateTextNode();
-            ruet.AppendChild(rText);
+            Console.WriteLine("Rue :");
+            //XmlText rText = doc.CreateTextNode(Console.ReadLine());
+            XmlText rText = doc.CreateTextNode("Avenue Jean Jaurès");
+            ruepatient.AppendChild(rText);
             
             XmlElement villepatient = doc.CreateElement("ville", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            XmlText vText = doc.CreateTextNode();
+            Console.WriteLine("Ville :");
+            //XmlText vText = doc.CreateTextNode(Console.ReadLine());
+            XmlText vText = doc.CreateTextNode("Grenoble");
             villepatient.AppendChild(vText);
 
             XmlElement cppatient = doc.CreateElement("codePostal", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            XmlText cText = doc.CreateTextNode();
+            Console.WriteLine("console Postal :");
+            //var cp = Console.ReadLine();
+            var cp = "38000";
+            if (cp.Length < 5)
+            {
+                Console.WriteLine("Le code Postal est mauvais");
+            }
+            XmlText cText = doc.CreateTextNode(cp);
             cppatient.AppendChild(cText);
+            
+            XmlElement adressepatient = doc.CreateElement("adresse", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
             
             adressepatient.AppendChild(ruepatient);
             adressepatient.AppendChild(villepatient);
-            adessepatient.appendChild(cppatient);
+            adressepatient.AppendChild(cppatient);
 
             
             
@@ -282,15 +298,14 @@ namespace ConsoleApp1
             XmlNodeList patients =  doc.GetElementsByTagName("patients");
             
             patients.Item(0).AppendChild(patient);
-            Console.WriteLine("Nombre d'infirmiers après rajout de patients :"+count2("patient",doc));
+            Console.WriteLine("Nombre de patients après rajout de patients :"+count2("patient",doc));
+            ajoutevisite("Niskotch", "1260-03-15","200","001",doc);
         }
 
-        public void ajoutevisite(string nom,string datev,string actev,string intervenantv)
+        public static void ajoutevisite(string nom,string datev,string actev,string intervenantv,XmlDocument doc)
         {
-            XmlDocument doc= new XmlDocument();
-            doc.Load();
             XmlNodeList noeuds = doc.GetElementsByTagName("patient");
-            XmlNode patient;
+            XmlNode patient = null;
             foreach (XmlNode noeud in noeuds)
             {
                 if (noeud.FirstChild.InnerText == nom)
@@ -301,18 +316,16 @@ namespace ConsoleApp1
             XmlElement visite = doc.CreateElement("visite","http://www.univ-grenoble-alpes.fr/l3miage/medical");
             
             XmlElement date = doc.CreateElement("date","http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            XmlNodeText dText = doc.CreateTextNode(datev);
+            XmlText dText = doc.CreateTextNode(datev);
             date.AppendChild(dText);
             
             XmlElement intervenant = doc.CreateElement("intervenant","http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            XmlNodeText iText = doc.CreateTextNode(intervenantv);
+            XmlText iText = doc.CreateTextNode(intervenantv);
             intervenant.AppendChild(iText);
             
             XmlElement acte = doc.CreateElement("acte","http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            XmlAttribute acteid = doc.CreateAttribute("id");
-            XmlNodeText acteText = doc.CreateTextNode(actev);
-            acteid.AppendChild(acteText);
-            acte.AppendChild(acteid);
+            
+            acte.SetAttribute("id",actev);
 
             visite.AppendChild(date);
             visite.AppendChild(acte);
@@ -347,7 +360,57 @@ namespace ConsoleApp1
             Console.WriteLine("Adresse cabinet complète? :" + hasAdresse("cabinet"));
             Console.WriteLine("Adresse patients complètes? :" + hasAdresse("patient"));
             Console.WriteLine("Tous les numero de secu valide? " + allnumerosocialvalide("C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\cabinet.xml"));
+            Console.WriteLine("------------------------------------");
+            Console.WriteLine("Ajout de Jean Némard :(");
             ajouteinfirmier("Némard","Jean");
+            Console.WriteLine("Ajout de Nikole Niskotch");
+            ajoutepatient("Niskotch","Nicole","F","1967-02-18","13");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("1.Serialisation Deserialisation Adresse");
+            String nmsp ="http:/www.univ-grenoble-alpes.fr/l3miage/medical" ;
+            String cabinetshema = "./data/xml/cabinet.xml";
+            String serialised ="C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\serialised.xml" ;
+            String pathAd = "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\Adresse.xml";
+            AdresseRO adresse;
+            //deserialisation    
+            using (TextReader reader = new StreamReader(pathAd))
+            {
+                var xmlAd = new XmlSerializer(typeof(AdresseRO));
+                adresse=(AdresseRO)xmlAd.Deserialize(reader);
+            }
+            //serialisation et validation
+            using (var writter = new StreamWriter(serialised))
+            {
+                var xmlAd = new XmlSerializer(typeof(AdresseRO));
+                xmlAd.Serialize(writter, adresse);
+                XMLUtils.ValidateXmlFileAsync(nmsp, cabinetshema,serialised);
+            }
+            //affiche adresse
+            Console.WriteLine(adresse);
+            
+            Console.WriteLine("2.Serialisation Deserialisation Infirmiers");
+            
+            Infirmiers linfirmiers;
+            //deserialisation
+            String pathIns = "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\Infirmiers.xml";
+            
+            var namespaces = new XmlSerializerNamespaces();
+            namespaces.Add(string.Empty, "http://www.univ-grenoble-alpes.fr/l3miage/medical");
+            
+            using (TextReader reader = new StreamReader(pathIns))
+            {
+                var xmlIn = new XmlSerializer(typeof(Infirmiers));
+                linfirmiers = (Infirmiers)xmlIn.Deserialize(reader);
+                Console.WriteLine(linfirmiers);
+            }
+            //serialisation
+            using (var writer = new StreamWriter(serialised))
+            {
+                var xmlIn = new XmlSerializer(typeof(Infirmiers));
+                xmlIn.Serialize(writer, linfirmiers);
+                XMLUtils.ValidateXmlFileAsync(nmsp, cabinetshema,serialised);
+            }
+            
         }
     }
 }
