@@ -27,9 +27,9 @@
     <xsl:template match="patient">
         <h1>Patient:</h1>
      <p>
-            _nom: <xsl:value-of select="nom"/><br/>
-            _prénom: <xsl:value-of select="prénom"/><br/>
-            _adresse: <xsl:value-of select="adresse"/><br/>
+            -nom: <xsl:value-of select="nom"/><br/>
+            -prénom: <xsl:value-of select="prénom"/><br/>
+            -adresse: <xsl:value-of select="adresse"/><br/>
      </p>
             <h1>Visite(s):</h1>
             <div class="visite">
@@ -40,9 +40,9 @@
     </xsl:template>
 
     <xsl:template match="visite">
-        _date: <xsl:value-of select="@date"/><br/>
-        _intervenant: <xsl:value-of select="intervenant/nom"/>&#160;<xsl:value-of select="intervenant/prénom"/><br/>
-        _acte: <xsl:value-of select="acte"/><br/>
+        -date: <xsl:value-of select="@date"/><br/>
+        -intervenant: <xsl:value-of select="intervenant/nom"/>&#160;<xsl:value-of select="intervenant/prénom"/><br/>
+        -acte: <xsl:value-of select="acte"/><br/>
     </xsl:template>
     
     <!-- Template pour les infos generales -->

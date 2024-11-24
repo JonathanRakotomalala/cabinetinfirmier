@@ -54,9 +54,17 @@ public class AdresseRO
         get { return _codePostal; }
     }
     public override string ToString() {
-        string s = "\n";
-        s += "etage = "+_etage;
-        s += "\nnumero = " + _numero;
+        string s = String.Empty;
+        if (_etage != null || _etage > 0)
+        {
+            s += "etage = " + _etage;
+        }
+
+        if (_numero != null || _numero > 0)
+        {
+            s += "\nnumero = " + _numero;
+        }
+
         s += "\nrue = " + _rue;
         s += "\nville = "+_ville;
         s += "\ncode postal = " + _codePostal;

@@ -1,21 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<infirmiers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.univ-grenoble-alpes.fr/l3miage/medical">
-  <infirmier>
-    <id>001</id>
-    <nom>Fréchie</nom>
-    <prénom>Sarah</prénom>
-    <photo>sarah.png</photo>
-  </infirmier>
-  <infirmier>
-    <id>002</id>
-    <nom>Stické</nom>
-    <prénom>Sophie</prénom>
-    <photo>sophie.png</photo>
-  </infirmier>
-  <infirmier>
-    <id>003</id>
-    <nom>Ochon</nom>
-    <prénom>Paul</prénom>
-    <photo>paul.png</photo>
-  </infirmier>
-</infirmiers>
+<cabinet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.univ-grenoble-alpes.fr/l3miage/medical">
+  <adresse>
+    <etage xsi:nil="true" />
+    <numero>60</numero>
+    <rue>rue de la Chimie</rue>
+    <ville>Grenoble</ville>
+    <codePostal>38041</codePostal>
+  </adresse>
+  <patients>
+    <patient>
+      <nom>Alécole</nom>
+      <prénom>Yvon</prénom>
+      <sexe>M</sexe>
+      <naissance>1998-08-22</naissance>
+      <numero>198082205545852</numero>
+      <adresse>
+        <etage>6</etage>
+        <numero>50</numero>
+        <rue>avenue Félix Viallet</rue>
+        <ville>Grenoble</ville>
+        <codePostal>38031</codePostal>
+      </adresse>
+      <visite>
+        <date>2015-12-08</date>
+        <intervenant>001</intervenant>
+        <acte id="109" />
+      </visite>
+    </patient>
+    <patient>
+      <nom>Orouge</nom>
+      <prénom>Elvire</prénom>
+      <sexe>F</sexe>
+      <naissance>1982-03-08</naissance>
+      <numero>282030802305201</numero>
+      <adresse>
+        <etage xsi:nil="true" />
+        <numero xsi:nil="true" />
+        <rue>: Rond-Point de la Croix de Vie</rue>
+        <ville>La Tronche</ville>
+        <codePostal>38700</codePostal>
+      </adresse>
+      <visite>
+        <date>2015-12-08</date>
+        <acte id="300" />
+      </visite>
+    </patient>
+    <patient>
+      <nom>Pien</nom>
+      <prénom>Oscare</prénom>
+      <sexe>M</sexe>
+      <naissance>1975-03-25</naissance>
+      <numero>175032506569210</numero>
+      <adresse>
+        <etage xsi:nil="true" />
+        <numero xsi:nil="true" />
+        <rue>rue Casimir Brenier</rue>
+        <ville>Grenoble</ville>
+        <codePostal>38000</codePostal>
+      </adresse>
+      <visite>
+        <date>2015-12-08</date>
+        <intervenant>002</intervenant>
+        <acte id="101" />
+      </visite>
+    </patient>
+    <patient>
+      <nom>Kapoëtla</nom>
+      <prénom>Xavier</prénom>
+      <sexe>M</sexe>
+      <naissance>2011-08-02</naissance>
+      <numero>111080206303582</numero>
+      <adresse>
+        <etage xsi:nil="true" />
+        <numero>25</numero>
+        <rue>rue des Martyrs</rue>
+        <ville>Grenoble</ville>
+        <codePostal>38042</codePostal>
+      </adresse>
+      <visite>
+        <date>2015-12-08</date>
+        <intervenant>003</intervenant>
+        <acte id="111" />
+      </visite>
+    </patient>
+  </patients>
+  <infirmiers>
+    <infirmier>
+      <id>001</id>
+      <nom>Fréchie</nom>
+      <prénom>Sarah</prénom>
+      <photo>sarah.png</photo>
+    </infirmier>
+    <infirmier>
+      <id>002</id>
+      <nom>Stické</nom>
+      <prénom>Sophie</prénom>
+      <photo>sophie.png</photo>
+    </infirmier>
+    <infirmier>
+      <id>003</id>
+      <nom>Ochon</nom>
+      <prénom>Paul</prénom>
+      <photo>paul.png</photo>
+    </infirmier>
+  </infirmiers>
+</cabinet>

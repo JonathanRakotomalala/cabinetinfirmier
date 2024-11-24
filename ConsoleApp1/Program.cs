@@ -203,7 +203,8 @@ namespace ConsoleApp1
             prenominfirmier.AppendChild(prenomText);
             
             XmlElement photo = doc.CreateElement("photo", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            XmlText photoText = doc.CreateTextNode(prenom+".png");
+            //les caractères du fichier doit être en minuscule
+            XmlText photoText = doc.CreateTextNode(prenom.ToLower()+".png");
             photo.AppendChild(photoText);
             
             infirmier.AppendChild(id);
@@ -343,11 +344,11 @@ namespace ConsoleApp1
             XMLUtils.ValidateXmlFileAsync("http://www.univ-grenoble-alpes.fr/l3miage/actes", "./data/xsd/actes.xsd",
                 "./data/xml/actes.xml ");
             Console.WriteLine("------------------------------------");
-            XMLUtils.XslTransform("./data/xml/cabinet.xml", "./data/xslt/page1.xslt",
-                "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\html\\page1.html", "003");
+            XMLUtils.XslTransform("./data/xml/cabinet.xml", "./data/xslt/pageinfirmier.xslt",
+                "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\html\\pageinfirmier.html", "003");
             Console.WriteLine("------------------------------------");
-            XMLUtils.XslTransformpatient("./data/xml/cabinet.xml", "./data/xslt/page2.xslt",
-                "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\nompatient.xml", "Kapoëtla");
+            XMLUtils.XslTransformpatient("C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\nompatient.xml", "./data/xslt/pagepatient.xslt",
+                "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\html\\nompatient.html", "Kapoëtla");
             Console.WriteLine("------------------------------------");
             Cabinet.AnalyseGlobale("./data/xml/cabinet.xml");
             Console.WriteLine("------------------------------------");
@@ -378,7 +379,7 @@ namespace ConsoleApp1
                 var xmlAd = new XmlSerializer(typeof(AdresseRO));
                 adresse=(AdresseRO)xmlAd.Deserialize(reader);
             }
-            //serialisation et validation
+            //serialisation pour ensuite valider
             using (var writter = new StreamWriter(serialised))
             {
                 var xmlAd = new XmlSerializer(typeof(AdresseRO));
@@ -410,7 +411,24 @@ namespace ConsoleApp1
                 xmlIn.Serialize(writer, linfirmiers);
                 XMLUtils.ValidateXmlFileAsync(nmsp, cabinetshema,serialised);
             }
+            //Deserialisation
+            Console.WriteLine("------------------------------Cabinet-----------------------------");
+            Cabinet cabinet;
+            String pathCab = "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\cabinet.xml";
+            using (TextReader reader = new StreamReader(pathCab))
+            {
+                var xmlCab = new XmlSerializer(typeof(Cabinet));
+                cabinet = (Cabinet)xmlCab.Deserialize(reader);
+                Console.WriteLine(cabinet);
+            }
             
+            using (var writer = new StreamWriter(serialised))
+            {
+                var xmlCa = new XmlSerializer(typeof(Cabinet));
+                xmlCa.Serialize(writer, cabinet);
+                XMLUtils.ValidateXmlFileAsync(nmsp, cabinetshema,serialised);
+            }
+
         }
     }
 }

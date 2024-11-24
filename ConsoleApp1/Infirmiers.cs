@@ -6,7 +6,7 @@ namespace ConsoleApp1;
 public class Infirmiers
 {
     [XmlElement("infirmier")]
-    public List<Infirmier> _Infirmiers{get;set;}
+    public List<InfirmierRO> _Infirmiers{get;set;}
     
     public override string ToString() {
         return string.Join("\n", _Infirmiers.Select(i => i.ToString()));

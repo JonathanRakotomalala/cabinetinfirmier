@@ -1,9 +1,25 @@
 using System.Xml;
+using System.Xml.Serialization;
+
 
 namespace ConsoleApp1;
-
+[XmlRoot("cabinet",Namespace="http://www.univ-grenoble-alpes.fr/l3miage/medical")][Serializable]
 public class Cabinet
-{
+{   
+    [XmlElement("adresse")]
+    public Adresse _Adresse{ get; set; }
+    [XmlElement("patients")]
+    public Patients _Patients{ get; set; }
+    [XmlElement("infirmiers")]
+    public Infirmiers _Infirmiers{ get; set; }
+
+    public override string ToString()
+    {
+        String s=String.Empty;
+        s+="-Adresse Cabinet: "+_Adresse.ToString()+"\n-Infirmiers:\n"+_Infirmiers.ToString()+"\n"+"-Patients: \n"+_Patients.ToString()+"\n";
+        return s;
+    }
+
     public static void AnalyseGlobale(string filepath)
     {
         var settings = new XmlReaderSettings();

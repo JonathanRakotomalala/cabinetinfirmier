@@ -21,16 +21,13 @@
       <None Update="data\html\CV.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="data\html\fm.html">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
       <None Update="data\html\nompatient.css">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="data\html\nompatient.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="data\html\page1.html">
+      <None Update="data\html\pageinfirmier.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="data\js\facture.js">
@@ -57,13 +54,13 @@
       <None Update="data\xslt\cabinet.xslt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="data\xslt\page1.xslt">
+      <None Update="data\xslt\pageinfirmier.xslt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="data\xslt\page2.xslt">
+      <None Update="data\xslt\pagepatientxml.xslt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="data\xslt\page3.xslt">
+      <None Update="data\xslt\pagepatient.xslt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
