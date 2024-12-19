@@ -4,7 +4,7 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:cab="http://www.univ-grenoble-alpes.fr/l3miage/medical">
     <xsl:param name ="destinedId"/>
-    <xsl:output method="html"/>
+    <xsl:output method="html" indent="yes"/>
 
     <!-- Variables temporaires  ; elles seront remplacées pour permettre 
    l'envoi de ces informations depuis le programme appelant vers la feuille xslt 

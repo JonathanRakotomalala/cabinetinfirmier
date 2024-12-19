@@ -3,7 +3,7 @@
                 xmlns:act="http://www.univ-grenoble-alpes.fr/l3miage/actes"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:cab="http://www.univ-grenoble-alpes.fr/l3miage/medical">
-    <xsl:output method="xml" indent="yes"/>
+    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
     <xsl:variable name ="actes" select ="document('../xml/actes.xml')/act:ngap/act:actes"/>
     <xsl:param name="nom"/>

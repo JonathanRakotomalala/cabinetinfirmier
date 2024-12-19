@@ -68,7 +68,7 @@ namespace ConsoleApp1
             AppContext.SetSwitch("Switch.System.Xml.Xsl.AllowDefaultResolver", true);
             
             //xml -> xml
-            String cabxmlPath = "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\cabinet.xml";
+            String cabxmlPath = "./data/xml/cabinet.xml";
             
            
       
@@ -78,7 +78,7 @@ namespace ConsoleApp1
             resolver.Credentials = System.Net.CredentialCache.DefaultCredentials;
             
             XslCompiledTransform xslt1 = new XslCompiledTransform();
-            xslt1.Load("./data/xslt/pagepatientxml.xslt",settings, resolver);
+            xslt1.Load("./data/xslt/patient_xml.xslt",settings, resolver);
             
             XsltArgumentList argList = new XsltArgumentList();
             argList.AddParam("nom", "",nompatient);

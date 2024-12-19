@@ -8,10 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="data\css\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Update="data\html\i2.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
@@ -21,10 +17,7 @@
       <None Update="data\html\CV.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="data\html\nompatient.css">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="data\html\nompatient.html">
+      <None Update="data\html\patient.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="data\html\pageinfirmier.html">
@@ -39,7 +32,7 @@
       <None Update="data\xml\cabinet.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="data\xml\nompatient.xml">
+      <None Update="data\xml\patient.xml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="data\xsd\actes.xsd">
@@ -57,10 +50,13 @@
       <None Update="data\xslt\pageinfirmier.xslt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="data\xslt\pagepatientxml.xslt">
+      <None Update="data\xslt\patient_xml.xslt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="data\xslt\pagepatient.xslt">
+      <None Update="data\xslt\patient_html.xslt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="data\css\nompatient.css">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

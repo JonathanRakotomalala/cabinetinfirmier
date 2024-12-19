@@ -230,6 +230,7 @@ namespace ConsoleApp1
             
             Console.WriteLine("Nombre de patients avant :"+count2("patient",doc));
             
+            
             XmlElement patient = doc.CreateElement("patient", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
             
 
@@ -257,21 +258,21 @@ namespace ConsoleApp1
             numsoc.AppendChild(numText);
             
             
-            Console.WriteLine("*****************  Entrer l'adresse  ******************");
+            Console.WriteLine("****  l'adresse du nouveau patient  ****");
             XmlElement ruepatient = doc.CreateElement("rue", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            Console.WriteLine("Rue :");
             //XmlText rText = doc.CreateTextNode(Console.ReadLine());
             XmlText rText = doc.CreateTextNode("Avenue Jean Jaurès");
+            Console.WriteLine("Rue :"+rText.InnerText);
             ruepatient.AppendChild(rText);
             
             XmlElement villepatient = doc.CreateElement("ville", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            Console.WriteLine("Ville :");
             //XmlText vText = doc.CreateTextNode(Console.ReadLine());
             XmlText vText = doc.CreateTextNode("Grenoble");
+            Console.WriteLine("Ville :"+vText.InnerText);
             villepatient.AppendChild(vText);
 
             XmlElement cppatient = doc.CreateElement("codePostal", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
-            Console.WriteLine("console Postal :");
+           // Console.WriteLine("Code Postal :");
             //var cp = Console.ReadLine();
             var cp = "38000";
             if (cp.Length < 5)
@@ -279,6 +280,7 @@ namespace ConsoleApp1
                 Console.WriteLine("Le code Postal est mauvais");
             }
             XmlText cText = doc.CreateTextNode(cp);
+            Console.WriteLine("Code Postal :"+cText.InnerText);
             cppatient.AppendChild(cText);
             
             XmlElement adressepatient = doc.CreateElement("adresse", "http://www.univ-grenoble-alpes.fr/l3miage/medical");
@@ -345,10 +347,10 @@ namespace ConsoleApp1
                 "./data/xml/actes.xml ");
             Console.WriteLine("------------------------------------");
             XMLUtils.XslTransform("./data/xml/cabinet.xml", "./data/xslt/pageinfirmier.xslt",
-                "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\html\\pageinfirmier.html", "003");
+                "./data/html/pageinfirmier.html", "003");
             Console.WriteLine("------------------------------------");
-            XMLUtils.XslTransformpatient("C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\nompatient.xml", "./data/xslt/pagepatient.xslt",
-                "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\html\\nompatient.html", "Kapoëtla");
+            XMLUtils.XslTransformpatient("../../../data/xml/patient.xml", "./data/xslt/patient_html.xslt",
+                "./data/html/patient.html", "Kapoëtla");
             Console.WriteLine("------------------------------------");
             Cabinet.AnalyseGlobale("./data/xml/cabinet.xml");
             Console.WriteLine("------------------------------------");
@@ -360,9 +362,9 @@ namespace ConsoleApp1
             Console.WriteLine("Nombre de patients " + count("patient"));
             Console.WriteLine("Adresse cabinet complète? :" + hasAdresse("cabinet"));
             Console.WriteLine("Adresse patients complètes? :" + hasAdresse("patient"));
-            Console.WriteLine("Tous les numero de secu valide? " + allnumerosocialvalide("C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\cabinet.xml"));
+            Console.WriteLine("Tous les numero de secu valide? " + allnumerosocialvalide("./data/xml/cabinet.xml"));
             Console.WriteLine("------------------------------------");
-            Console.WriteLine("Ajout de Jean Némard :(");
+            Console.WriteLine("Ajout de Jean Némard :");
             ajouteinfirmier("Némard","Jean");
             Console.WriteLine("Ajout de Nikole Niskotch");
             ajoutepatient("Niskotch","Nicole","F","1967-02-18","13");
@@ -370,8 +372,8 @@ namespace ConsoleApp1
             Console.WriteLine("1.Serialisation Deserialisation Adresse");
             String nmsp ="http:/www.univ-grenoble-alpes.fr/l3miage/medical" ;
             String cabinetshema = "./data/xml/cabinet.xml";
-            String serialised ="C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\serialised.xml" ;
-            String pathAd = "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\Adresse.xml";
+            String serialised ="./data/xml/serialised.xml" ;
+            String pathAd = "../../../data/xml/Adresse.xml";
             AdresseRO adresse;
             //deserialisation    
             using (TextReader reader = new StreamReader(pathAd))
@@ -393,7 +395,7 @@ namespace ConsoleApp1
             
             Infirmiers linfirmiers;
             //deserialisation
-            String pathIns = "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\Infirmiers.xml";
+            String pathIns = "../../../data/xml/Infirmiers.xml";
             
             var namespaces = new XmlSerializerNamespaces();
             namespaces.Add(string.Empty, "http://www.univ-grenoble-alpes.fr/l3miage/medical");
@@ -414,7 +416,7 @@ namespace ConsoleApp1
             //Deserialisation
             Console.WriteLine("------------------------------Cabinet-----------------------------");
             Cabinet cabinet;
-            String pathCab = "C:\\Users\\jon4t\\RiderProjects\\ConsoleApp1\\ConsoleApp1\\data\\xml\\cabinet.xml";
+            String pathCab = "./data/xml/cabinet.xml";
             using (TextReader reader = new StreamReader(pathCab))
             {
                 var xmlCab = new XmlSerializer(typeof(Cabinet));

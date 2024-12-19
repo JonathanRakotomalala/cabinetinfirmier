@@ -9,7 +9,7 @@
         <html>
             <head>
                 <title>Page du patient</title>
-                <link rel="stylesheet" type="text/css" href="nompatient.css"/>
+                <link rel="stylesheet" type="text/css" href="../css/nompatient.css"/>
             </head>
             <body>
                 <div class="patient">
